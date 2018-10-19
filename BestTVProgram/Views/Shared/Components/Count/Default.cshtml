@@ -1,0 +1,7 @@
+﻿@model int
+
+<a class="align-content-center"
+   asp-controller="Favourites" asp-action="Index"
+   asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+    Каналов в Избранном: <b>@Model</b>
+</a>

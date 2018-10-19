@@ -1,0 +1,56 @@
+﻿@model ChannelsWithProgramAndTvProgramViewFormatViewModel
+@using System.IO
+@{
+    ViewData["Title"] = "Программа передач";
+}
+
+<h3>
+    Программа телепередач
+    @switch (Model.TvProgramViewFormat)
+    {
+        case TvProgramViewFormatsEnum.ForAllDay:
+            @:на весь день
+            break;
+        case TvProgramViewFormatsEnum.ForEndOfDay:
+            @:до конца дня
+            break;
+        case TvProgramViewFormatsEnum.NowAndSoon:
+            @:сейчас и скоро
+            break;
+        default:
+            break;
+    }
+</h3>
+
+<div class="container marketing">
+    <div class="row">
+        <div>
+            @foreach (var c in Model.ChannelWithProgramList)
+            {
+            <div>
+                <channelimage channel-id=@c.Channel.Id channel-name=@c.Channel.Name /> <b>@c.Channel.Name</b> <div class="chnum">@c.Channel.OrderNumber</div>
+                @*@foreach (TVProgram p in c.GetTVPrograms(Model.TvProgramViewFormat))
+        {
+            <div>
+                <p>@p.Time @p.Program</p>
+            </div>
+        }*@
+                @*@c.GetTVPrograms(Model.TvProgramViewFormat).Count*@
+                @{
+                    var programCollection = c.GetTVPrograms(Model.TvProgramViewFormat);
+                    for (int i = 0; i < programCollection.Count; i++)
+                    {
+                        if (programCollection[i] != null)
+                        {
+                            <div>
+                                <p>@programCollection[i].Time @programCollection[i].Program</p>
+                            </div>
+                        }
+                    }
+
+                }
+            </div>
+            }
+        </div>
+    </div>
+</div>

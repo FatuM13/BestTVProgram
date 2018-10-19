@@ -1,0 +1,20 @@
+﻿@model IEnumerable<string>
+@{
+    ViewData["Title"] = "Список каналов";
+}
+
+<div class="container marketing">
+    <div class="row">
+        <div>
+            <h3>Программа телепередач</h3>
+            
+            @foreach (var channelName in Model)
+            {
+
+                    <p>@channelName</p>
+            }
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,252 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    /*background: #808080;*/
+}
+
+header {
+    background: black;
+    text-align: center;
+}
+
+    header a {
+        text-decoration: none;
+        outline: none;
+        display: block;
+        transition: .3s ease-in-out;
+    }
+span {
+    padding-left: 1em;
+}
+
+td, th, image {
+    vertical-align: middle;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.logo {
+    color: #D5B45B;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    padding: 20px 0;
+}
+
+nav {
+    display: table;
+    margin: 0 auto;
+}
+
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+.topmenu:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.topmenu > li {
+    /*width: 25%;*/
+    float: left;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+}
+
+    .topmenu > li > a {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFFFFF;
+        padding: 15px 10px;
+    }
+
+.topmenu li a:hover {
+    color: #D5B45B;
+}
+
+.submenu-link:after {
+    color: inherit;
+    margin-left: 10px;
+}
+
+.submenu {
+    background: #273037;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 5;
+    width: 180px;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    transition: .5s ease-in-out;
+}
+
+    .submenu a {
+        color: white;
+        text-align: left;
+        vertical-align:central;
+        padding: 3px 5px;
+        font-size: 13px;
+        border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .submenu li:last-child a {
+        border-bottom: none;
+    }
+
+.topmenu > li:hover .submenu {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.center {
+    width: 200px; /* Ширина элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+}
+
+div.chnum {
+    border-right: #0054aa 1px solid;
+    border-left: #0054aa 1px solid;
+    border-top: #0054aa 1px solid;
+    border-bottom: #0054aa 1px solid;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    float: right;
+    margin-right: 0px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    background-color: #3084d9;
+    background-image: url(pic/chname_bgr.gif);
+}
+
+/* checkbox */
+/* Customize the label (the container) */
+.labelcontainer {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    /* Hide the browser's default checkbox */
+    .labelcontainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.labelcontainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.labelcontainer input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.labelcontainer input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.labelcontainer .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Create a custom radio button */
+.radiocheckmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .radiocheckmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .radiocheckmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radiocheckmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .radiocheckmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.labelcontainer .radiocheckmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+/*.span-shadow {
+    background: #D2973D
+}
+.span-shadow div:hover {
+    box-shadow: 0 0 0 2px #D2973D inset, 0 0 0 4px white inset;
+}*/

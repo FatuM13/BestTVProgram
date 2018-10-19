@@ -1,0 +1,78 @@
+﻿@model FavouritesIndexViewModel
+@{
+    ViewData["Title"] = "Каналы в Избранном";
+    Layout = "_Layout";
+}
+<h3>Каналы в Избранном</h3>
+@{
+    List<Channel> favouriteChannels = new List<Channel>();
+    int i = 0;
+}
+<form asp-controller="Home" asp-action="ChooseFavourites" method="post">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Логотип</th>
+                        <th>Название канала</th>
+                        <th>Порядковый номер для сортировки</th>
+                        <th class="text-right"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Favourites.FavouriteLines)
+                    {
+                        favouriteChannels.Add(new Channel { Id = line.Id, Name = line.Name, OrderNumber = i++ });
+
+                    <tr>
+                        <td>
+                            @i.
+                        </td>
+                        <td>
+                            <channelimage channel-id=@line.Id channel-name=@line.Name />
+                        </td>
+                        <td>
+                            @*class="text-right"*@
+                            @line.Name
+                            <input type="hidden" name="ids" value="@line.Id" />
+                            <input type="hidden" name="names" value="@line.Name" />
+
+                        </td>
+
+                        <td>
+                            @*class="text-right"*@
+
+                            @*<input type="number" name="favouriteChannels[@i].OrderNumber"
+        value="@line.OrderNumber" />*@
+                            <input type="number" name="orderNumbers"
+                                   value="@line.OrderNumber" style="max-width: 4em" />
+                            @*maxlength="5" size="5"
+                                class="input-sm input-lg"
+        @line.Quantity*@
+
+                        </td>
+                        <td>
+                            <a asp-action="RemoveFromFavourites" class="btn btn-danger"
+                               asp-route-id=@line.Id asp-route-returnUrl="@Model.ReturnUrl">Удалить</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+    <div class="text-center">
+        <a class="btn btn-success" href="/Home/ChooseFavourites">Выбрать ещё</a>
+        <a asp-action="ClearAllFavourites" class="btn btn-danger"
+           asp-route-returnUrl="@Model.ReturnUrl">Очистить список</a>
+        @*            <a class="btn btn-danger" href="/Home/ClearAllFavourites">Очистить список</a>*@
+        <input type="hidden" name="favouriteChannels"
+               value="@favouriteChannels" />
+        <button type="submit" class="btn btn-success">
+            Сохранить изменнённый порядок сортировки@*Сохранить избранные каналы*@
+        </button>
+
+    </div>
+</form>
+
+

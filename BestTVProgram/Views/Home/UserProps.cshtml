@@ -1,0 +1,37 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "Настройки пользователя";
+}
+<h4>Показывать ТВ-программу:</h4>
+<form asp-action="UserProps" method="post">
+    <div class="form-group">
+        <label class="labelcontainer">
+            <input type="radio" name="tvProgramViewFormats" value="ForAllDay"
+                   @if (Model.TvProgramViewFormat == TvProgramViewFormatsEnum.ForAllDay) { @: checked
+                   } />
+            На весь день
+
+            <span class="radiocheckmark"></span>
+        </label>
+        <label class="labelcontainer">
+            <input type="radio" name="tvProgramViewFormats" value="ForEndOfDay"
+                   @if (Model.TvProgramViewFormat == TvProgramViewFormatsEnum.ForEndOfDay) { @: checked
+                   } />
+            До конца дня
+
+            <span class="radiocheckmark"></span>
+        </label>
+        <label class="labelcontainer">
+            <input type="radio" name="tvProgramViewFormats" value="NowAndSoon"
+                   @if (Model.TvProgramViewFormat == TvProgramViewFormatsEnum.NowAndSoon) { @: checked
+                   } />
+            Сейчас и скоро
+            <span class="radiocheckmark"></span>
+        </label>
+    </div>
+
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>
+
