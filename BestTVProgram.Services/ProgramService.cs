@@ -3,6 +3,7 @@ using BestTVProgram.Services.Interfaces;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -105,6 +106,7 @@ namespace BestTVProgram.Services
                         +
                        "/td[@class='channeltitle']").InnerHtml;
 
+                        DateTime previousTime=DateTime.MinValue; //midNightTime
                         channelWithProgram.Channel = new Channel { Id = id, Name = tempString };
                         foreach (var item in htmlNode.ChildNodes)
                         {
@@ -119,7 +121,22 @@ namespace BestTVProgram.Services
                                 if (item.Attributes["class"].Value == "prname2" ||
                                     (item.Attributes["class"].Value == "pastprname2"))
                                 {
-                                    channelWithProgram.TVPrograms.Add(new TVProgram { Time = tempString, Program = item.InnerText }); //str1 + " " + item.InnerText
+                                    DateTime dateTime;
+                                    try
+                                    {
+                                        dateTime = DateTime.Parse(tempString, new CultureInfo("ru-RU"));
+                                        if (dateTime < previousTime) //если программа перешагнула через полночь
+                                        {
+                                            dateTime = dateTime.AddDays(1);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        dateTime = DateTime.Now;
+                                    }
+
+                                    previousTime = dateTime;
+                                    channelWithProgram.TVPrograms.Add(new TVProgram { DateTime = dateTime, Program = item.InnerText }); //str1 + " " + item.InnerText
                                 }
                             }
                         }

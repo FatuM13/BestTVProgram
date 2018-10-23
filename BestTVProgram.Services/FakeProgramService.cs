@@ -1,5 +1,6 @@
 ﻿using BestTVProgram.Core.Models;
 using BestTVProgram.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,8 +21,8 @@ namespace BestTVProgram.Services
                     Channel = new Channel {Name = "ОНТ" },
                     TVPrograms = new List<TVProgram>()
                     {
-                        new TVProgram { Time="10:00", Program="Передача №1" },
-                        new TVProgram { Time="11:00", Program="Передача №2" }
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(10*60), Program="Передача №1" }, //"10:00"
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(11*60), Program="Передача №2" }  //"11:00"
                     }
                 }
                 ,
@@ -30,8 +31,8 @@ namespace BestTVProgram.Services
                     Channel = new Channel {Name = "Беларусь 1" },
                     TVPrograms = new List<TVProgram>()
                     {
-                        new TVProgram { Time="10:00", Program="Передача №1" },
-                        new TVProgram { Time="11:00", Program="Передача №2" }
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(10*60), Program="Передача №1" }, //"10:00"
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(11*60), Program="Передача №2" }  //"11:00"
                     }
                 }
                 ,
@@ -40,8 +41,8 @@ namespace BestTVProgram.Services
                     Channel = new Channel {Name = "Беларусь 2" },
                     TVPrograms = new List<TVProgram>()
                     {
-                        new TVProgram { Time="10:00", Program="Передача №1" },
-                        new TVProgram { Time="11:00", Program="Передача №2" }
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(10*60), Program="Передача №1" }, //"10:00"
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(11*60), Program="Передача №2" }  //"11:00"
                     }
                 }
                 ,
@@ -50,8 +51,8 @@ namespace BestTVProgram.Services
                     Channel = new Channel {Name = "Беларусь 3" },
                     TVPrograms = new List<TVProgram>()
                     {
-                        new TVProgram { Time="10:00", Program="Передача №1" },
-                        new TVProgram { Time="11:00", Program="Передача №2" }
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(10*60), Program="Передача №1" }, //"10:00"
+                        new TVProgram { DateTime=DateTime.Today.AddMinutes(11*60), Program="Передача №2" }  //"11:00"
                     }
                 }
             };

@@ -32,9 +32,9 @@ namespace BestTVProgram.Core.Models
             int programCount = 0;
             foreach (var tvp in TVPrograms)
             {
-                try
-                {
-                    dateTimeValue = DateTime.Parse(tvp.Time, culture);
+                //try
+                //{
+                    dateTimeValue = tvp.DateTime;//DateTime.Parse(tvp.Time, culture);
 
                     if (tvProgramViewFormat == TvProgramViewFormatsEnum.ForEndOfDay)
                     {
@@ -70,11 +70,11 @@ namespace BestTVProgram.Core.Models
 
                     currentTVP = tvp;
 
-                }
-                catch (FormatException e)
-                {
-                    resultTVPrograms.Add(new TVProgram { Program = e.Message + "|" + tvp.Program, Time = tvp.Time });
-                }
+                //}
+                //catch (FormatException e)
+                //{
+                //    resultTVPrograms.Add(new TVProgram { Program = e.Message + "|" + tvp.Program, Time = tvp.Time });
+                //}
 
             }
 
@@ -84,7 +84,7 @@ namespace BestTVProgram.Core.Models
 
     public class TVProgram
     {
-        public string Time { get; set; }
+        public DateTime DateTime { get; set; }
         public string Program { get; set; }
 
     }

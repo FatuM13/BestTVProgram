@@ -32,6 +32,8 @@ namespace BestTVProgram.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var tvProgramViewFormatByDefault = TvProgramViewFormatsEnum.NowAndSoon;
+
             if (User.Identity.IsAuthenticated)
             {
                 AppUser user = await CurrentUser;
@@ -57,19 +59,19 @@ namespace BestTVProgram.Controllers
                             }
                         }
 
-                        var tvProgramViewFormat = TvProgramViewFormatsEnum.ForAllDay;
+ 
                         if (Enum.IsDefined(typeof(TvProgramViewFormatsEnum), user.TvProgramViewFormat))
                         {
-                            tvProgramViewFormat = user.TvProgramViewFormat;
+                            tvProgramViewFormatByDefault = user.TvProgramViewFormat;
                         }
 
 
-                        return View(new ChannelsWithProgramAndTvProgramViewFormatViewModel { ChannelWithProgramList = resultCollection, TvProgramViewFormat = tvProgramViewFormat });
+                        return View(new ChannelsWithProgramAndTvProgramViewFormatViewModel { ChannelWithProgramList = resultCollection, TvProgramViewFormat = tvProgramViewFormatByDefault });
                     }
                 }
             }
 
-            return View(new ChannelsWithProgramAndTvProgramViewFormatViewModel { ChannelWithProgramList = programService.ChannelsWithProgram, TvProgramViewFormat = TvProgramViewFormatsEnum.ForAllDay });
+            return View(new ChannelsWithProgramAndTvProgramViewFormatViewModel { ChannelWithProgramList = programService.ChannelsWithProgram, TvProgramViewFormat = tvProgramViewFormatByDefault });
         }
 
         [Authorize]
