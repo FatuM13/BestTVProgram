@@ -21,35 +21,56 @@
             break;
     }
 </h3>
+@*@{ //@:DateTime.Now.ToLocalTime();
+    TimeZoneInfo timeZoneInfoForClient = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
+    //summer time
+    //DateTimeOffset serverTime = DateTimeOffset.Now;
+    //DateTimeOffset dateTimeOffsetForClient = serverTime.ToOffset(timeZoneInfoForClient.BaseUtcOffset);
 
+    //winter time
+    var dt = DateTime.UtcNow;
+    var utcOffset = new DateTimeOffset(dt, TimeSpan.Zero);
+    DateTimeOffset dateTimeOffsetForClient = utcOffset.ToOffset(timeZoneInfoForClient.GetUtcOffset(utcOffset));
+
+    DateTime dateTimeNow = dateTimeOffsetForClient.DateTime.AddHours(-1);
+    //@:dateTimeNow.ToString("HH:mm");
+    TimeZoneInfo timeZoneInfoLocal = TimeZoneInfo.Local;
+    //@:(timeZoneInfoLocal.DaylightName);
+
+}
+@DateTime.Now.ToLocalTime();
+
+@dateTimeNow.ToString("HH:mm");
+
+@timeZoneInfoLocal.DaylightName*@
 <div class="container marketing">
     <div class="row">
         <div>
             @foreach (var c in Model.ChannelWithProgramList)
             {
-            <div>
-                <channelimage channel-id=@c.Channel.Id channel-name=@c.Channel.Name /> <b>@c.Channel.Name</b> <div class="chnum">@c.Channel.OrderNumber</div>
-                @*@foreach (TVProgram p in c.GetTVPrograms(Model.TvProgramViewFormat))
-        {
-            <div>
-                <p>@p.Time @p.Program</p>
-            </div>
-        }*@
-                @*@c.GetTVPrograms(Model.TvProgramViewFormat).Count*@
-                @{
-                    var programCollection = c.GetTVPrograms(Model.TvProgramViewFormat);
-                    for (int i = 0; i < programCollection.Count; i++)
-                    {
-                        if (programCollection[i] != null)
+                <div>
+                    <channelimage channel-id=@c.Channel.Id channel-name=@c.Channel.Name /> <b>@c.Channel.Name</b> <div class="chnum">@c.Channel.OrderNumber</div>
+                    @*@foreach (TVProgram p in c.GetTVPrograms(Model.TvProgramViewFormat))
                         {
                             <div>
-                                <p>@programCollection[i].DateTime.ToString("HH:mm") @programCollection[i].Program</p>
+                                <p>@p.Time @p.Program</p>
                             </div>
+                        }*@
+                    @*@c.GetTVPrograms(Model.TvProgramViewFormat).Count*@
+                    @{
+                        var programCollection = c.GetTVPrograms(Model.TvProgramViewFormat);
+                        for (int i = 0; i < programCollection.Count; i++)
+                        {
+                            if (programCollection[i] != null)
+                            {
+                                <div>
+                                    <p>@programCollection[i].DateTime.ToString("HH:mm") @programCollection[i].Program</p>
+                                </div>
+                            }
                         }
-                    }
 
-                }
-            </div>
+                    }
+                </div>
             }
         </div>
     </div>

@@ -22,10 +22,21 @@ namespace BestTVProgram.Core.Models
             CultureInfo culture = new CultureInfo("ru-RU");
             DateTime dateTimeValue;
 
+            
             TimeZoneInfo timeZoneInfoForClient = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
-            DateTimeOffset serverTime = DateTimeOffset.Now;
-            DateTimeOffset dateTimeOffsetForClient = serverTime.ToOffset(timeZoneInfoForClient.BaseUtcOffset);
+            //TimeZoneInfo timeZoneInfoLocal = TimeZoneInfo.Local;
+            //string s = timeZoneInfoLocal.DaylightName;
+            //summer time
+            //DateTimeOffset serverTime = DateTimeOffset.Now;
+            //DateTimeOffset dateTimeOffsetForClient = serverTime.ToOffset(timeZoneInfoForClient.BaseUtcOffset);
+            //DateTime dateTimeNow = dateTimeOffsetForClient.DateTime;
+
+            //winter time
+            var dt = DateTime.UtcNow;
+            var utcOffset = new DateTimeOffset(dt, TimeSpan.Zero);
+            DateTimeOffset dateTimeOffsetForClient = utcOffset.ToOffset(timeZoneInfoForClient.GetUtcOffset(utcOffset));
             DateTime dateTimeNow = dateTimeOffsetForClient.DateTime;
+
             //DateTime currentDateTimeValue = DateTime.Now;
             TVProgram currentTVP = null;
             bool stopCheckForNow = false;

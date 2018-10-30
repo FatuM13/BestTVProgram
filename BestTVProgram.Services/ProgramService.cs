@@ -124,7 +124,8 @@ namespace BestTVProgram.Services
                                     DateTime dateTime;
                                     try
                                     {
-                                        dateTime = DateTime.Parse(tempString, new CultureInfo("ru-RU"));
+                                        //dateTime = DateTime.Parse(tempString, new CultureInfo("ru-RU"));
+                                        dateTime = DateTime.Parse(tempString, new CultureInfo("ru-RU")).AddHours(1);
                                         if (dateTime < previousTime) //если программа перешагнула через полночь
                                         {
                                             dateTime = dateTime.AddDays(1);
@@ -132,7 +133,8 @@ namespace BestTVProgram.Services
                                     }
                                     catch
                                     {
-                                        dateTime = DateTime.Now;
+                                        //dateTime = DateTime.Now;
+                                        dateTime = DateTime.Now.AddHours(1);
                                     }
 
                                     previousTime = dateTime;
